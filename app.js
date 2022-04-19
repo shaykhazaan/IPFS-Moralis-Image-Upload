@@ -1,5 +1,5 @@
 const express = require('express');
-
+const bodyParser = require("body-parser");
 const app = express();
 
 
@@ -17,11 +17,23 @@ const Moralis = require("moralis/node");
 
 
 
+// app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
-    res.sendFile( __dirname + "/" + "index.html" );
+    const reqName = "";
+    const reqDesc = "";
+    res.sendFile( __dirname + "/views/" + "index.html" );
+    console.log(reqName, reqDesc);
+    
 })
 
+app.post("/", (req, res) => {
+  reqName = req.body.metadataName;
+  reqDesc = req.body.metadataDescription;
+  console.log(reqName, reqDesc);
+  // res.send(reqName, reqDesc);
+});
 
 const port = 3000
 app.listen(port, () => {
